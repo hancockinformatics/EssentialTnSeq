@@ -1,18 +1,20 @@
 #' true_essential
 #'
+#' @description Based on a set of data frames containing TnSeq results (from
+#'   Tradis or Transit/Gumbel), returns genes which are condidered essential in
+#'   all conditions/replicates.
+#'
+#' @import tidyverse
+#'
 #' @param dfs List of data frames for all conditions/replicates
 #' @param tool Tool that was used to genrate essentiality data; currently
 #'   supports either Tradis or Transit/Gumbel
 #' @param total_num Total number of conditions/replicates
 #'
 #' @return
-#' @export
+#' @export true_essential
 #'
 #' @examples
-#'
-#' Based on a set of data frames containing TnSeq results (from Tradis or
-#' Transit/Gumbel), returns genes which are condidered essential in all
-#' conditions/replicates.
 #'
 true_essential <- function(dfs, tool, total_num) {
 
