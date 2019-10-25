@@ -19,7 +19,11 @@ replicates.}
 Data frame of essential genes for the condition.
 }
 \description{
-et_essential
+Determines essentiality for a set of genes from Gumbel or
+  Tradis. For Gumbel, a gene is considered essential if it was assigned a
+  call of "E". For Tradis, essential genes are those with 0 read counts. The
+  filtered data frame which is returned contains the additional columns used
+  in defining essentiality.
 }
 \references{
 None.
