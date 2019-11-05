@@ -43,9 +43,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
                       pattern = paste0(., ".*csv.all.csv"),
                       full.names = TRUE,
                       ignore.case = TRUE,
-                      recursive = TRUE) %>%
-            set_names(., reps)) %>%
-      set_names(., conditions)
+                      recursive = TRUE))
 
   } else if (tool == "Gumbel") {
     my_files <- conditions %>%
@@ -53,15 +51,29 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
                       pattern = paste0(., ".*locus_tags.tsv"),
                       full.names = TRUE,
                       ignore.case = TRUE,
-                      recursive = TRUE) %>%
-            set_names(., reps)) %>%
-      set_names(., conditions)
+                      recursive = TRUE))
   }
+
+  # Check for each condition that we have grabbed the right number of files. If
+  # we don't, stop and provide an error message to the user.
+  for (i in 1:length(conditions)) {
+    if (length(my_files[[i]]) != length(reps)) {
+      stop(paste0("The condition ", conditions[i], " matches the wrong number ",
+                  "of files (not the same as number of replicates specified). ",
+                  "Please ensure condition names are specific and non-overlapping."))
+    }
+  }
+
+  # Now set the names based on conditions and replicates, after we've checked we
+  # have the right number of files.
+  my_files <- my_files %>% map(
+    ~set_names(., reps)
+  ) %>% set_names(., conditions)
 
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {
     writeLines(paste0(tool, " files for condition ", conditions[i], ":"))
-    writeLines(paste0("\t\t", as.character(my_files[[unlist(conditions[i])]])))
+    writeLines(paste0("\t", as.character(my_files[[unlist(conditions[i])]])))
     writeLines("")
   }
 
