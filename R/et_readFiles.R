@@ -58,7 +58,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
   # we don't, stop and provide an error message to the user.
   for (i in 1:length(conditions)) {
     if (length(my_files[[i]]) != length(reps)) {
-      stop(paste0("The condition ", conditions[i], " matches the wrong number ",
+      stop(paste0("The condition '", conditions[i], "' matches the wrong number ",
                   "of files (not the same as number of replicates specified). ",
                   "Please ensure condition names are specific and non-overlapping."))
     }
