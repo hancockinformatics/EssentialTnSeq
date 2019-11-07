@@ -10,6 +10,7 @@
 #'
 #' @return Nested and named list of data frames for all conditions and
 #'   replicates.
+#'
 #' @export
 #'
 #' @import dplyr
@@ -58,17 +59,18 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
   # we don't, stop and provide an error message to the user.
   for (i in 1:length(conditions)) {
     if (length(my_files[[i]]) != length(reps)) {
-      stop(paste0("The condition '", conditions[i], "' matches the wrong number ",
-                  "of files (not the same as number of replicates specified). ",
-                  "Please ensure condition names are specific and non-overlapping."))
+      stop(paste0("The condition '", conditions[i], "' matches the wrong ",
+                  "number of files (not the same as number of replicates ",
+                  "specified). Please ensure condition names are specific and ",
+                  "non-overlapping."))
     }
   }
 
   # Now set the names based on conditions and replicates, after we've checked we
   # have the right number of files.
-  my_files <- my_files %>% map(
-    ~set_names(., reps)
-  ) %>% set_names(., conditions)
+  my_files <- my_files %>%
+    map(~set_names(., reps)) %>% # Set replicate names within each condition
+    set_names(., conditions) # Set condition names for the overall list
 
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {
@@ -84,18 +86,14 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
     # Read in raw Gumbel files
     raw_dfs <- map(my_files, function(x)
       map(x, function(y)
-
         read_tsv(y, progress = FALSE)
-
       )
     )
 
     # Select Gumbel columns needed for analysis
     select_dfs <- map(raw_dfs, function(x)
       map(x, function(y)
-
         select(y, locus_tag, Call)
-
       )
     )
 
@@ -104,22 +102,17 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
     # Read Tradis data frames
     raw_dfs <- map(my_files, function(x)
       map(x, function(y)
-
         read_csv(y)
-
       )
     )
 
     # Select Tradis columns needed for analysis
     select_dfs <- map(raw_dfs, function(x)
       map(x, function(y)
-
         select(y, locus_tag, read_count)
-
       )
     )
   }
 
   return(select_dfs)
-
 }

@@ -6,6 +6,7 @@
 #'
 #' @return The same list of data frames, but with columns renamed to be specific
 #'   to the condition.
+#'
 #' @export
 #'
 #' @description Renames columns of all data frames in a list based on the name

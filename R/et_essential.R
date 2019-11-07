@@ -7,6 +7,7 @@
 #'   replicates.
 #'
 #' @return Data frame of essential genes for the condition.
+#'
 #' @export
 #'
 #' @import dplyr
@@ -30,26 +31,18 @@ et_essential <- function(tool, input_df, cutoff) {
 
 
   if (tool == "Gumbel") {
-
-    # Code for Gumbel
     ess_df <- input_df %>%
       mutate(sum_counts_E = rowSums(. == "E"),
              ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non"))
 
   } else if (tool == "Tradis") {
-
-    # Code for Tradis
     ess_df <- input_df %>%
       mutate(sum_counts_0 = rowSums(. == 0),
              ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non"))
-
   }
 
   # Filter out non-essential genes
-  output_df <- ess_df %>%
-    filter(ess_stat == "ess")
-
+  output_df <- ess_df %>% filter(ess_stat == "ess")
 
   return(output_df)
-
 }
