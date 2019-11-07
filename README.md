@@ -6,12 +6,13 @@ essentiality analysis from TnSeq data.
 
 ## Installation
 
-You can install the released version of EssentialTnSeq from the [Github](https://github.com/travis-m-blimkie/EssentialTnSeq) with:
+You can install the released version of EssentialTnSeq from the 
+[Github](https://github.com/travis-m-blimkie/EssentialTnSeq) with:
 
 ``` r
-# First, install devtools and tidyverse
+# First, install dependencies devtools and tidyverse
 install.packages(c("devtools", "tidyverse"))
 
-# Finally install EssentialTnSeq
+# Then install EssentialTnSeq
 devtools::install_github("travis-m-blimkie/EssentialTnSeq")
 ```
