@@ -7,7 +7,7 @@
 et_readFiles(tool, conditions, reps, data_folder)
 }
 \arguments{
-\item{tool}{One of Gumbel or Tradis}
+\item{tool}{String; one of "Gumbel" or "Tradis".}
 
 \item{conditions}{List of conditions. These should correspond to file names,
 and should be spcific and non-overlapping.}
@@ -25,7 +25,7 @@ Nested and named list of data frames for all conditions and
 \description{
 Reads in multiples files, corresponding to different conditions
   and replicates from TnSeq analysis with Gumbel of Tradis. Creates a nested,
-  named list of files for further analysis.
+  named list of data frames for further analysis.
 }
 \references{
 None.

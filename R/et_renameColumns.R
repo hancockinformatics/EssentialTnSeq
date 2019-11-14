@@ -2,7 +2,7 @@
 #'
 #' @param input_list List of data frames for a given condition, with each data
 #'   frame corresponding to a different replicate.
-#' @param cond_name Condition for the given list.
+#' @param cond_name Condition name (string) for the given list.
 #'
 #' @return The same list of data frames, but with columns renamed to be specific
 #'   to the condition.
@@ -10,7 +10,8 @@
 #' @export
 #'
 #' @description Renames columns of all data frames in a list based on the name
-#'   of the list element containing those data frames.
+#'   of the list element containing those data frames. Designed to use the
+#'   output from \code{EssentialTnSeq::et_readFiles()}.
 #'
 #' @references None.
 #'

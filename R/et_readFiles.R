@@ -1,6 +1,6 @@
 #' et_readFiles
 #'
-#' @param tool One of Gumbel or Tradis
+#' @param tool String; one of "Gumbel" or "Tradis".
 #' @param conditions List of conditions. These should correspond to file names,
 #'   and should be spcific and non-overlapping.
 #' @param reps Number of replicates, also corresponding to the number of files
@@ -19,7 +19,7 @@
 #'
 #' @description Reads in multiples files, corresponding to different conditions
 #'   and replicates from TnSeq analysis with Gumbel of Tradis. Creates a nested,
-#'   named list of files for further analysis.
+#'   named list of data frames for further analysis.
 #'
 #' @references None.
 #'
@@ -28,14 +28,17 @@
 et_readFiles <- function(tool, conditions, reps, data_folder) {
 
 
+  # Make tool name lower case so we know what to expect.
+  tool <- str_to_lower(tool)
+
   # Stop and print error if tool specified incorrectly
-  if (tool %in% c("Gumbel", "Tradis") == FALSE) {
+  if (tool %in% c("gumbel", "tradis") == FALSE) {
     stop('Please enter either "Gumbel" or "Tradis" for tool.')
   }
 
 
   # Generate list of files to be used
-  if (tool == "Tradis") {
+  if (tool == "tradis") {
     my_files <- conditions %>%
       map(~list.files(data_folder,
                       pattern = paste0(., ".*csv.all.csv"),
@@ -43,7 +46,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
                       ignore.case = TRUE,
                       recursive = TRUE))
 
-  } else if (tool == "Gumbel") {
+  } else if (tool == "gumbel") {
     my_files <- conditions %>%
       map(~list.files(data_folder,
                       pattern = paste0(., ".*locus_tags.tsv"),
@@ -78,7 +81,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
 
 
   # Read files and select columns based on specified tool
-  if (tool == "Gumbel") {
+  if (tool == "gumbel") {
 
     # Read in raw Gumbel files
     raw_dfs <- map(my_files, function(x)
@@ -94,7 +97,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
       )
     )
 
-  } else if (tool == "Tradis") {
+  } else if (tool == "tradis") {
 
     # Read Tradis data frames
     raw_dfs <- map(my_files, function(x)

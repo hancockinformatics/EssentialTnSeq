@@ -24,18 +24,23 @@
 #'
 et_essential <- function(tool, input_df, cutoff) {
 
+
+  # Make tool name lower case so we know what to expect.
+  tool <- str_to_lower(tool)
+
+
   # Stop and print error if tool specified incorrectly
-  if (tool %in% c("Gumbel", "Tradis") == FALSE) {
+  if (tool %in% c("gumbel", "tradis") == FALSE) {
     stop('Please enter either "Gumbel" or "Tradis" for tool.')
   }
 
 
-  if (tool == "Gumbel") {
+  if (tool == "gumbel") {
     ess_df <- input_df %>%
       mutate(sum_counts_E = rowSums(. == "E"),
              ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non"))
 
-  } else if (tool == "Tradis") {
+  } else if (tool == "tradis") {
     ess_df <- input_df %>%
       mutate(sum_counts_0 = rowSums(. == 0),
              ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non"))
