@@ -27,9 +27,6 @@
 #'
 et_readFiles <- function(tool, conditions, reps, data_folder) {
 
-  # Prevent "read_csv()" messages
-  options(readr.num_columns = 0)
-
 
   # Stop and print error if tool specified incorrectly
   if (tool %in% c("Gumbel", "Tradis") == FALSE) {
@@ -86,7 +83,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
     # Read in raw Gumbel files
     raw_dfs <- map(my_files, function(x)
       map(x, function(y)
-        read_tsv(y, progress = FALSE)
+        read_tsv(y, progress = FALSE, col_types = cols())
       )
     )
 
@@ -102,7 +99,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
     # Read Tradis data frames
     raw_dfs <- map(my_files, function(x)
       map(x, function(y)
-        read_csv(y)
+        read_csv(y, progress = FALSE, col_types = cols())
       )
     )
 
@@ -112,6 +109,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
         select(y, locus_tag, read_count)
       )
     )
+
   }
 
   return(select_dfs)
