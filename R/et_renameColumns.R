@@ -1,7 +1,7 @@
 #' et_renameColumns
 #'
-#' @param input_list List of data frames for a given condition, with each data
-#'   frame corresponding to a different replicate.
+#' @param input_list Named list of data frames for a given condition, with each
+#'   data frame corresponding to a different replicate.
 #' @param cond_name Condition name (string) for the given list.
 #'
 #' @return The same list of data frames, but with columns renamed to be specific

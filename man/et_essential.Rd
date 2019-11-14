@@ -7,16 +7,16 @@
 et_essential(tool, input_df, cutoff)
 }
 \arguments{
-\item{tool}{Tool used to generate the results; one of Gumbel or Tradis.}
+\item{tool}{String; one of "Gumbel" or "Tradis".}
 
 \item{input_df}{Data frame containing essentiality call for all replicates
 for a given condition.}
 
 \item{cutoff}{Threshold for determining essentiality based on the number of
-replicates.}
+replicates. Recommend setting to one less than the number of replicates.}
 }
 \value{
-Data frame of essential genes for the condition.
+Filtered data frame of essential genes for the condition.
 }
 \description{
 Determines essentiality for a set of genes from Gumbel or

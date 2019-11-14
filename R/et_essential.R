@@ -1,12 +1,12 @@
 #' et_essential
 #'
-#' @param tool Tool used to generate the results; one of Gumbel or Tradis.
+#' @param tool String; one of "Gumbel" or "Tradis".
 #' @param input_df Data frame containing essentiality call for all replicates
 #'   for a given condition.
 #' @param cutoff Threshold for determining essentiality based on the number of
-#'   replicates.
+#'   replicates. Recommend setting to one less than the number of replicates.
 #'
-#' @return Data frame of essential genes for the condition.
+#' @return Filtered data frame of essential genes for the condition.
 #'
 #' @export
 #'

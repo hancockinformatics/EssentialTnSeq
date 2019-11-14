@@ -9,11 +9,12 @@ et_readFiles(tool, conditions, reps, data_folder)
 \arguments{
 \item{tool}{String; one of "Gumbel" or "Tradis".}
 
-\item{conditions}{List of conditions. These should correspond to file names,
-and should be spcific and non-overlapping.}
+\item{conditions}{List of conditions (character). These should correspond to
+file names, and should be spcific and non-overlapping.}
 
-\item{reps}{Number of replicates, also corresponding to the number of files
-for each condition}
+\item{reps}{Character vector or list containing the number of replicates,
+also corresponding to the number of files for each condition. Should be in
+the form \code{c("R1", "R2", "R3")}.}
 
 \item{data_folder}{Directory containing files for all conditionas and
 replicates.}
@@ -25,7 +26,9 @@ Nested and named list of data frames for all conditions and
 \description{
 Reads in multiples files, corresponding to different conditions
   and replicates from TnSeq analysis with Gumbel of Tradis. Creates a nested,
-  named list of data frames for further analysis.
+  named list of data frames for further analysis. This function is set to
+  look for files recursively, meaning it will descend into sub-directories
+  from the given starting point.
 }
 \references{
 None.

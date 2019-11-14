@@ -7,8 +7,8 @@
 et_renameColumns(input_list, cond_name)
 }
 \arguments{
-\item{input_list}{List of data frames for a given condition, with each data
-frame corresponding to a different replicate.}
+\item{input_list}{Named list of data frames for a given condition, with each
+data frame corresponding to a different replicate.}
 
 \item{cond_name}{Condition name (string) for the given list.}
 }
