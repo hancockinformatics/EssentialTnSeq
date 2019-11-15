@@ -1,4 +1,4 @@
-<img src="www/logo_hex.svg" align="right"/>
+<img src="man/figures/logo_hex.svg" align="right"/>
 
 # EssentialTnSeq
 

@@ -22,6 +22,11 @@
 #'
 #' @seealso \url{https://github.com/travis-m-blimkie/EssentialTnSeq}
 #'
+#' @examples
+#' \dontrun{
+#'   et_essential("Gumbel", treatment1_df, cutoff = 2)
+#' }
+#'
 et_essential <- function(tool, input_df, cutoff) {
 
 

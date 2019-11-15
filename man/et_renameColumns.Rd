@@ -21,6 +21,13 @@ Renames columns of all data frames in a list based on the name
   of the list element containing those data frames. Designed to use the
   output from \code{EssentialTnSeq::et_readFiles()}.
 }
+\examples{
+\dontrun{
+  et_renameColumns(input_list = treatment1_list,
+                   cond_name = "treatment1")
+}
+
+}
 \references{
 None.
 }

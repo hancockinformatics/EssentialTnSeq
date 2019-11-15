@@ -30,6 +30,17 @@ Reads in multiples files, corresponding to different conditions
   look for files recursively, meaning it will descend into sub-directories
   from the given starting point.
 }
+\examples{
+\dontrun{
+  et_readFiles(
+    tool = "Gumbel",
+    conditions = c("treatment", "control"),
+    reps = c("r1", "r2", "r3"),
+    data_folder = "GumbelResults"
+  )
+}
+
+}
 \references{
 None.
 }

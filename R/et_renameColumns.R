@@ -17,6 +17,12 @@
 #'
 #' @seealso \url{https://github.com/travis-m-blimkie/EssentialTnSeq}
 #'
+#' @examples
+#' \dontrun{
+#'   et_renameColumns(input_list = treatment1_list,
+#'                    cond_name = "treatment1")
+#' }
+#'
 et_renameColumns <- function(input_list, cond_name) {
 
   for (i in 1:length(input_list)) {

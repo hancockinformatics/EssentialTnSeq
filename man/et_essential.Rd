@@ -25,6 +25,12 @@ Determines essentiality for a set of genes from Gumbel or
   filtered data frame which is returned contains the additional columns used
   in defining essentiality.
 }
+\examples{
+\dontrun{
+  et_essential("Gumbel", treatment1_df, cutoff = 2)
+}
+
+}
 \references{
 None.
 }

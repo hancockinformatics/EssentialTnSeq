@@ -28,6 +28,16 @@
 #'
 #' @seealso \url{https://github.com/travis-m-blimkie/EssentialTnSeq}
 #'
+#' @examples
+#' \dontrun{
+#'   et_readFiles(
+#'     tool = "Gumbel",
+#'     conditions = c("treatment", "control"),
+#'     reps = c("r1", "r2", "r3"),
+#'     data_folder = "GumbelResults"
+#'   )
+#' }
+#'
 et_readFiles <- function(tool, conditions, reps, data_folder) {
 
 
