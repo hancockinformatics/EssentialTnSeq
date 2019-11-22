@@ -17,3 +17,7 @@ LazyData: true
 RoxygenNote: 7.0.0
 URL: https://github.com/travis-m-blimkie/EssentialTnSeq
 BugReports: https://github.com/travis-m-blimkie/EssentialTnSeq/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

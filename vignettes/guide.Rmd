@@ -1,0 +1,43 @@
+---
+title: "EssentialTnSeq"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: yes
+    theme: flatly
+    highlight: kate
+vignette: >
+  %\VignetteIndexEntry{EssentialTnSeq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  message = FALSE, 
+  warning = FALSE, 
+  comment = "",
+  collapse = TRUE
+)
+```
+
+<hr>
+
+## Installation and Setup
+```{r setup}
+# First, install dependencies devtools and tidyverse
+# install.packages(c("devtools", "tidyverse"))
+
+# Then install and load EssentialTnSeq
+# devtools::install_github("travis-m-blimkie/EssentialTnSeq")
+library(EssentialTnSeq)
+
+# Also load the tidyverse
+library(tidyverse)
+```
+
+
+## Introduction
+This package was designed to facilitate the analysis of TnSeq data;
+specifically, the results of Tradis or Transit/Gumbel essentiality pipelines.
