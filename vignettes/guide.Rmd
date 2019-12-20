@@ -15,8 +15,6 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE, 
-  message = FALSE, 
-  warning = FALSE, 
   comment = "",
   collapse = TRUE
 )
@@ -34,10 +32,11 @@ Additionally, the functions included with this package are designed to work with
 
 # Then install and load EssentialTnSeq
 # devtools::install_github("travis-m-blimkie/EssentialTnSeq")
-library(EssentialTnSeq)
-
 # Also load the tidyverse
-library(tidyverse)
+suppressPackageStartupMessages({
+  library(EssentialTnSeq)
+  library(tidyverse)
+})
 ```
 
 
@@ -77,6 +76,26 @@ grown in different media, along with treatment/no treatment, they should be
 named like: "media1_untreated" and "media1_treated". In this case, using just
 "media1" in place of "media1_untreated" means the incorrect number of files
 would be identified (as "media1" also matches "media1_treated".)
+* reps - the number of replicates for the experimental conditions. Should be a
+character vector, like `c("r1", "r2", "r3")`. It should also match the number of
+files for each condition, otherwise file input will not function properly (you
+will get an error).
+* data_folder - the directory containing all of the data files to be used (i.e.
+all conditions and replicates).
+
+The code below utilizes the preview data shown above, reading in the files with
+the `et_readFiles()` function and previously described arguments.
+
+```{r et_readFiles, eval=FALSE}
+my_conditions <- c("media1_untreated", "media1_treated")
+my_reps <- c("r1", "r2", "r3")
+
+raw_data <- et_readFiles(tool = "Tradis", 
+                         conditions = my_conditions, 
+                         reps = my_reps, 
+                         data_folder = "Data_dir")
+```
+
 
 
 
