@@ -1,6 +1,6 @@
 Package: EssentialTnSeq
 Title: TnSeq Essentiality Analysis
-Version: 0.0.3
+Version: 0.1.0
 Authors@R: 
     person(given = "Travis",
            family = "Blimkie",
@@ -14,7 +14,7 @@ Imports:
     readr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
 URL: https://github.com/travis-m-blimkie/EssentialTnSeq
 BugReports: https://github.com/travis-m-blimkie/EssentialTnSeq/issues
 Suggests: 

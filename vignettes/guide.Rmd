@@ -26,17 +26,15 @@ knitr::opts_chunk$set(
 The `devtools` package is required for installation of EssentialTnSeq.
 Additionally, the functions included with this package are designed to work with
 (and in fact make use of) the `tidyverse` suite of packages/functions.
-```{r setup}
+```{r setup, eval = FALSE}
 # First, install dependencies devtools and tidyverse
 # install.packages(c("devtools", "tidyverse"))
 
 # Then install and load EssentialTnSeq
 # devtools::install_github("travis-m-blimkie/EssentialTnSeq")
 # Also load the tidyverse
-suppressPackageStartupMessages({
-  library(EssentialTnSeq)
-  library(tidyverse)
-})
+library(EssentialTnSeq)
+library(tidyverse)
 ```
 
 

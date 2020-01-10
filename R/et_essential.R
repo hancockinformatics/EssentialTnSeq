@@ -31,7 +31,7 @@ et_essential <- function(tool, input_df, cutoff) {
 
 
   # Make tool name lower case so we know what to expect.
-  tool <- str_to_lower(tool)
+  tool <- tolower(tool)
 
 
   # Stop and print error if tool specified incorrectly

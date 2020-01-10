@@ -42,7 +42,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
 
 
   # Make tool name lower case so we know what to expect.
-  tool <- str_to_lower(tool)
+  tool <- tolower(tool)
 
   # Stop and print error if tool specified incorrectly
   if (tool %in% c("gumbel", "tradis") == FALSE) {
@@ -52,20 +52,26 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
 
   # Generate list of files to be used
   if (tool == "tradis") {
-    my_files <- conditions %>%
-      map(~list.files(data_folder,
-                      pattern = paste0(., ".*csv.all.csv"),
-                      full.names = TRUE,
-                      ignore.case = TRUE,
-                      recursive = TRUE))
+    my_files <- conditions %>% map(
+      ~list.files(
+        data_folder,
+        pattern = paste0(., ".*csv.all.csv"),
+        full.names = TRUE,
+        ignore.case = TRUE,
+        recursive = TRUE
+      )
+    )
 
   } else if (tool == "gumbel") {
-    my_files <- conditions %>%
-      map(~list.files(data_folder,
-                      pattern = paste0(., ".*locus_tags.tsv"),
-                      full.names = TRUE,
-                      ignore.case = TRUE,
-                      recursive = TRUE))
+    my_files <- conditions %>% map(
+      ~list.files(
+        data_folder,
+        pattern = paste0(., ".*locus_tags.tsv"),
+        full.names = TRUE,
+        ignore.case = TRUE,
+        recursive = TRUE
+      )
+    )
   }
 
   # Check for each condition that we have grabbed the right number of files. If
@@ -87,9 +93,9 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
 
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {
-    writeLines(paste0(tool, " files for condition ", conditions[i], ":"))
-    writeLines(paste0("\t", as.character(my_files[[unlist(conditions[i])]])))
-    writeLines("")
+    message(paste0(tool, " files for condition ", conditions[i], ":"))
+    message(paste0("\t", as.character(my_files[[unlist(conditions[i])]])))
+    message("")
   }
 
 
