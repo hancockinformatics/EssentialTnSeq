@@ -14,8 +14,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE, 
-  comment = "",
+  echo     = TRUE, 
+  comment  = "",
   collapse = TRUE
 )
 ```
@@ -25,14 +25,13 @@ knitr::opts_chunk$set(
 ## Installation and Setup
 The `devtools` package is required for installation of EssentialTnSeq.
 Additionally, the functions included with this package are designed to work with
-(and in fact make use of) the `tidyverse` suite of packages/functions.
+(and internally make use of) the `tidyverse` suite of packages & functions.
 ```{r setup, eval = FALSE}
 # First, install dependencies devtools and tidyverse
 # install.packages(c("devtools", "tidyverse"))
 
-# Then install and load EssentialTnSeq
+# Then install and load EssentialTnSeq, along with tidyverse
 # devtools::install_github("travis-m-blimkie/EssentialTnSeq")
-# Also load the tidyverse
 library(EssentialTnSeq)
 library(tidyverse)
 ```
@@ -44,21 +43,26 @@ specifically, the results of Tradis or Transit/Gumbel essentiality pipelines.
 The package includes three functions which are designed to be used together to
 create a complete workflow, from Tradis or Transit/Gumbel outputs to lists of
 essential genes.  
-The three functions and examples of their usage are demonstrated in this vignette.  
+The three functions and examples of their usage are demonstrated in this
+vignette.
+
 
 ## Tradis
 ### 0. Input Data
-As mentioned previously, this package and its functions are built to make use of the output from essenitality analysis of TnSeq data from Tradis or Gumbel.  
+As mentioned previously, this package and its functions are built to make use of
+the output from essenitality analysis of TnSeq data from Tradis or Gumbel.  
+
 Input files for the Tradis side of this essentiality pipeline should have been
 generated as a result of calling `tradis_gene_insert_sites` from the Tradis
 suite of functions. Files should be named something like
 "condition1_genomeRef.tradis_gene_insert_sites.csv.all.csv". Note final element
-of the file name ("csv.all.csv") is used by the EssentialTnSeq import function
+of the file name ("csv.all.csv"), which is used by the `et_readFiles()` function
 to identify relevant files, and as such should be consistent with what is
 denoted here.  
+
 An example directory containing Tradis results is included below. 
 
-[]()
+![]()
 
 
 ### 1. Reading Data
@@ -67,7 +71,8 @@ arguments for this function are detailed below, along with an example (keeping
 with the directory shown above).  
 Arguments:
 
-* tool - one of "Tradis" or "Gumbel". For this current workflow, we will use "Tradis".
+* tool - one of "Tradis" or "Gumbel". For this current workflow, we will use
+"Tradis".
 * conditions - a list or character vector of condition names. These should match
 file names, and not overlap with one another. For example, if you have bacteria
 grown in different media, along with treatment/no treatment, they should be
@@ -84,16 +89,19 @@ all conditions and replicates).
 The code below utilizes the preview data shown above, reading in the files with
 the `et_readFiles()` function and previously described arguments.
 
-```{r et_readFiles, eval=FALSE}
-my_conditions <- c("media1_untreated", "media1_treated")
+```{r et_readFiles, eval = FALSE}
+my_conditions <- c("", "", "")
 my_reps <- c("r1", "r2", "r3")
 
 raw_data <- et_readFiles(tool = "Tradis", 
                          conditions = my_conditions, 
                          reps = my_reps, 
-                         data_folder = "Data_dir")
+                         data_folder = "")
 ```
 
-
+Let's take a look at the structure of our initial input data:
+```{r echo = FALSE}
+raw_data
+```
 
 
