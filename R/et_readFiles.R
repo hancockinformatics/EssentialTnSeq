@@ -94,8 +94,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {
     message(paste0(tool, " files for condition ", conditions[i], ":"))
-    message(paste0("\t", as.character(my_files[[unlist(conditions[i])]])))
-    message("")
+    message(paste0("\t", as.character(my_files[[unlist(conditions[i])]]), "\n"))
   }
 
 
