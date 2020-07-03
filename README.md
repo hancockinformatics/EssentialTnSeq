@@ -1,4 +1,4 @@
-<img src="man/figures/logo_hex.svg" align="right" height="100px"/>
+<img src="man/figures/logo_hex.png" align="right" height="100px"/>
 
 # **EssentialTnSeq**
 
