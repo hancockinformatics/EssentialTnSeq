@@ -32,8 +32,10 @@ Additionally, the functions included with this package are designed to work with
 
 # Then install and load EssentialTnSeq, along with tidyverse
 # devtools::install_github("travis-m-blimkie/EssentialTnSeq")
-library(EssentialTnSeq)
+
+# Load required packages with library()
 library(tidyverse)
+library(EssentialTnSeq)
 ```
 
 
@@ -62,7 +64,6 @@ denoted here.
 
 An example directory containing Tradis results is included below. 
 
-![]()
 
 
 ### 1. Reading Data
@@ -100,8 +101,8 @@ raw_data <- et_readFiles(tool = "Tradis",
 ```
 
 Let's take a look at the structure of our initial input data:
-```{r echo = FALSE}
+```{r echo = FALSE, eval = FALSE}
 raw_data
 ```
 
-
+<br>

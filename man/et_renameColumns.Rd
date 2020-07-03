@@ -23,8 +23,10 @@ Renames columns of all data frames in a list based on the name
 }
 \examples{
 \dontrun{
-  et_renameColumns(input_list = treatment1_list,
-                   cond_name = "treatment1")
+  et_renameColumns(
+    input_list = treatment1_list,
+    cond_name = "treatment1"
+  )
 }
 
 }
@@ -32,5 +34,5 @@ Renames columns of all data frames in a list based on the name
 None.
 }
 \seealso{
-\url{https://github.com/travis-m-blimkie/EssentialTnSeq}
+\url{https://github.com/hancockinformatics/EssentialTnSeq}
 }

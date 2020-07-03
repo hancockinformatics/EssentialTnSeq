@@ -26,7 +26,7 @@
 #'
 #' @references None.
 #'
-#' @seealso \url{https://github.com/travis-m-blimkie/EssentialTnSeq}
+#' @seealso \url{https://github.com/hancockinformatics/EssentialTnSeq}
 #'
 #' @examples
 #' \dontrun{
@@ -88,8 +88,8 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
   # Now set the names based on conditions and replicates, after we've checked we
   # have the right number of files.
   my_files <- my_files %>%
-    map(~set_names(., reps)) %>% # Set replicate names within each condition
-    set_names(., conditions) # Set condition names for the overall list
+    map(~set_names(., reps)) %>%  # Set replicate names within each condition
+    set_names(., conditions)      # Set condition names for the overall list
 
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {

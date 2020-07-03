@@ -45,5 +45,5 @@ Reads in multiples files, corresponding to different conditions
 None.
 }
 \seealso{
-\url{https://github.com/travis-m-blimkie/EssentialTnSeq}
+\url{https://github.com/hancockinformatics/EssentialTnSeq}
 }

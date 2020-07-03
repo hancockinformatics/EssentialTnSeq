@@ -35,5 +35,5 @@ Determines essentiality for a set of genes from Gumbel or
 None.
 }
 \seealso{
-\url{https://github.com/travis-m-blimkie/EssentialTnSeq}
+\url{https://github.com/hancockinformatics/EssentialTnSeq}
 }

@@ -20,7 +20,7 @@
 #'
 #' @references None.
 #'
-#' @seealso \url{https://github.com/travis-m-blimkie/EssentialTnSeq}
+#' @seealso \url{https://github.com/hancockinformatics/EssentialTnSeq}
 #'
 #' @examples
 #' \dontrun{
@@ -42,13 +42,17 @@ et_essential <- function(tool, input_df, cutoff) {
 
   if (tool == "gumbel") {
     ess_df <- input_df %>%
-      mutate(sum_counts_E = rowSums(. == "E"),
-             ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non"))
+      mutate(
+        sum_counts_E = rowSums(. == "E"),
+        ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non")
+      )
 
   } else if (tool == "tradis") {
     ess_df <- input_df %>%
-      mutate(sum_counts_0 = rowSums(. == 0),
-             ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non"))
+      mutate(
+        sum_counts_0 = rowSums(. == 0),
+        ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non")
+      )
   }
 
   # Filter out non-essential genes
