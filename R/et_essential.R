@@ -1,12 +1,13 @@
 #' et_essential
 #'
-#' @param tool Tool used to generate the results; one of Gumbel or Tradis.
+#' @param tool String; one of "Gumbel" or "Tradis".
 #' @param input_df Data frame containing essentiality call for all replicates
 #'   for a given condition.
 #' @param cutoff Threshold for determining essentiality based on the number of
-#'   replicates.
+#'   replicates. Recommend setting to one less than the number of replicates.
 #'
-#' @return Data frame of essential genes for the condition.
+#' @return Filtered data frame of essential genes for the condition.
+#'
 #' @export
 #'
 #' @import dplyr
@@ -19,37 +20,43 @@
 #'
 #' @references None.
 #'
-#' @seealso \url{https://github.com/travis-m-blimkie/EssentialTnSeq}
+#' @seealso \url{https://github.com/hancockinformatics/EssentialTnSeq}
+#'
+#' @examples
+#' \dontrun{
+#'   et_essential("Gumbel", treatment1_df, cutoff = 2)
+#' }
 #'
 et_essential <- function(tool, input_df, cutoff) {
 
+
+  # Make tool name lower case so we know what to expect.
+  tool <- tolower(tool)
+
+
   # Stop and print error if tool specified incorrectly
-  if (tool %in% c("Gumbel", "Tradis") == FALSE) {
+  if (tool %in% c("gumbel", "tradis") == FALSE) {
     stop('Please enter either "Gumbel" or "Tradis" for tool.')
   }
 
 
-  if (tool == "Gumbel") {
-
-    # Code for Gumbel
+  if (tool == "gumbel") {
     ess_df <- input_df %>%
-      mutate(sum_counts_E = rowSums(. == "E"),
-             ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non"))
+      mutate(
+        sum_counts_E = rowSums(. == "E"),
+        ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non")
+      )
 
-  } else if (tool == "Tradis") {
-
-    # Code for Tradis
+  } else if (tool == "tradis") {
     ess_df <- input_df %>%
-      mutate(sum_counts_0 = rowSums(. == 0),
-             ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non"))
-
+      mutate(
+        sum_counts_0 = rowSums(. == 0),
+        ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non")
+      )
   }
 
   # Filter out non-essential genes
-  output_df <- ess_df %>%
-    filter(ess_stat == "ess")
-
+  output_df <- ess_df %>% filter(ess_stat == "ess")
 
   return(output_df)
-
 }
