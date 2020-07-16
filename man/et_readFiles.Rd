@@ -4,19 +4,18 @@
 \alias{et_readFiles}
 \title{et_readFiles}
 \usage{
-et_readFiles(tool, conditions, reps, data_folder)
+et_readFiles(tool, conditions, num_reps, data_folder)
 }
 \arguments{
 \item{tool}{String; one of "Gumbel" or "Tradis".}
 
 \item{conditions}{List of conditions (character). These should correspond to
-file names, and should be spcific and non-overlapping.}
+file names, and should be specific and non-overlapping.}
 
-\item{reps}{Character vector or list containing the number of replicates,
-also corresponding to the number of files for each condition. Should be in
-the form \code{c("R1", "R2", "R3")}.}
+\item{num_reps}{The number of replicates, corresponding to the number of files
+for each condition.}
 
-\item{data_folder}{Directory containing files for all conditionas and
+\item{data_folder}{Directory containing files for all conditions and
 replicates.}
 }
 \value{
@@ -35,7 +34,7 @@ Reads in multiples files, corresponding to different conditions
   et_readFiles(
     tool = "Gumbel",
     conditions = c("treatment", "control"),
-    reps = c("r1", "r2", "r3"),
+    num_reps = 3,
     data_folder = "GumbelResults"
   )
 }

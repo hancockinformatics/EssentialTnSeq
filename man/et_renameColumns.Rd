@@ -4,13 +4,13 @@
 \alias{et_renameColumns}
 \title{et_renameColumns}
 \usage{
-et_renameColumns(input_list, cond_name)
+et_renameColumns(input_list, condition)
 }
 \arguments{
 \item{input_list}{Named list of data frames for a given condition, with each
 data frame corresponding to a different replicate.}
 
-\item{cond_name}{Condition name (string) for the given list.}
+\item{condition}{Condition name (string) for the given list.}
 }
 \value{
 The same list of data frames, but with columns renamed to be specific
@@ -25,7 +25,7 @@ Renames columns of all data frames in a list based on the name
 \dontrun{
   et_renameColumns(
     input_list = treatment1_list,
-    cond_name = "treatment1"
+    condition = "treatment1"
   )
 }
 

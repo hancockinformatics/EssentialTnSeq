@@ -5,6 +5,9 @@
 #'   for a given condition.
 #' @param cutoff Threshold for determining essentiality based on the number of
 #'   replicates. Recommend setting to one less than the number of replicates.
+#' @param filter If \code{TRUE} (default), the result returned to the user is
+#'   filtered to only contains the genes determined essential. If \code{FALSE},
+#'   the unfiltered data frame is returned instead.
 #'
 #' @return Filtered data frame of essential genes for the condition.
 #'
@@ -24,10 +27,10 @@
 #'
 #' @examples
 #' \dontrun{
-#'   et_essential("Gumbel", treatment1_df, cutoff = 2)
+#'   et_essential("Gumbel", treatment1_df, cutoff = 2, filter = TRUE)
 #' }
 #'
-et_essential <- function(tool, input_df, cutoff) {
+et_essential <- function(tool, input_df, cutoff, filter = TRUE) {
 
 
   # Make tool name lower case so we know what to expect.
@@ -45,18 +48,26 @@ et_essential <- function(tool, input_df, cutoff) {
       mutate(
         sum_counts_E = rowSums(. == "E"),
         ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non")
-      )
+      ) %>%
+      as_tibble()
 
   } else if (tool == "tradis") {
     ess_df <- input_df %>%
       mutate(
         sum_counts_0 = rowSums(. == 0),
         ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non")
-      )
+      ) %>%
+      as_tibble()
   }
 
   # Filter out non-essential genes
-  output_df <- ess_df %>% filter(ess_stat == "ess")
+  df_filtered <- filter(ess_df, ess_stat == "ess")
 
-  return(output_df)
+  # Return filtered or unfiltered data frame based on user argument
+  if (filter) {
+    return(df_filtered)
+  } else{
+    return(ess_df)
+  }
+
 }
