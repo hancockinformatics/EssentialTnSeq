@@ -27,16 +27,19 @@
 #'
 et_renameColumns <- function(input_list, condition) {
 
-  for (i in 1:length(input_list)) {
+  step1 <- input_list
 
-    colnames(input_list[[i]])[2] <-
-      paste0(
-        condition,
-        "_",
-        names(input_list)[i],
-        "_",
-        colnames(input_list[[i]])[2]
-      )
+  for (i in 1:length(step1)) {
+    colnames(step1[[i]])[2] <- paste0(
+      condition,
+      "_",
+      names(step1)[i],
+      "_",
+      colnames(step1[[i]])[2]
+    )
   }
-  return(input_list)
+
+  step2 <- plyr::join_all(step1, type = "full") %>% as_tibble()
+
+  return(step2)
 }
