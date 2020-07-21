@@ -39,7 +39,8 @@ et_renameColumns <- function(input_list, condition) {
     )
   }
 
-  step2 <- plyr::join_all(step1, type = "full") %>% as_tibble()
+  step2 <-
+    plyr::join_all(step1, by = "locus_tag", type = "full") %>% as_tibble()
 
   return(step2)
 }
