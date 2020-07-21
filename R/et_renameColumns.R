@@ -2,7 +2,7 @@
 #'
 #' @param input_list Named list of data frames for a given condition, with each
 #'   data frame corresponding to a different replicate.
-#' @param cond_name Condition name (string) for the given list.
+#' @param condition Condition name (string) for the given list.
 #'
 #' @return The same list of data frames, but with columns renamed to be specific
 #'   to the condition.
@@ -21,22 +21,26 @@
 #' \dontrun{
 #'   et_renameColumns(
 #'     input_list = treatment1_list,
-#'     cond_name = "treatment1"
+#'     condition = "treatment1"
 #'   )
 #' }
 #'
-et_renameColumns <- function(input_list, cond_name) {
+et_renameColumns <- function(input_list, condition) {
 
-  for (i in 1:length(input_list)) {
+  step1 <- input_list
 
-    colnames(input_list[[i]])[2] <-
-      paste0(
-        cond_name,
-        "_",
-        names(input_list)[i],
-        "_",
-        colnames(input_list[[i]])[2]
-      )
+  for (i in 1:length(step1)) {
+    colnames(step1[[i]])[2] <- paste0(
+      condition,
+      "_",
+      names(step1)[i],
+      "_",
+      colnames(step1[[i]])[2]
+    )
   }
-  return(input_list)
+
+  step2 <-
+    plyr::join_all(step1, by = "locus_tag", type = "full") %>% as_tibble()
+
+  return(step2)
 }

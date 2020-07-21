@@ -2,11 +2,10 @@
 #'
 #' @param tool String; one of "Gumbel" or "Tradis".
 #' @param conditions List of conditions (character). These should correspond to
-#'   file names, and should be spcific and non-overlapping.
-#' @param reps Character vector or list containing the number of replicates,
-#'   also corresponding to the number of files for each condition. Should be in
-#'   the form \code{c("R1", "R2", "R3")}.
-#' @param data_folder Directory containing files for all conditionas and
+#'   file names, and should be specific and non-overlapping.
+#' @param num_reps The number of replicates, corresponding to the number of files
+#' for each condition.
+#' @param data_folder Directory containing files for all conditions and
 #'   replicates.
 #'
 #' @return Nested and named list of data frames for all conditions and
@@ -17,6 +16,7 @@
 #' @import dplyr
 #' @import purrr
 #' @import readr
+#' @import stringr
 #'
 #' @description Reads in multiples files, corresponding to different conditions
 #'   and replicates from TnSeq analysis with Gumbel of Tradis. Creates a nested,
@@ -33,12 +33,12 @@
 #'   et_readFiles(
 #'     tool = "Gumbel",
 #'     conditions = c("treatment", "control"),
-#'     reps = c("r1", "r2", "r3"),
+#'     num_reps = 3,
 #'     data_folder = "GumbelResults"
 #'   )
 #' }
 #'
-et_readFiles <- function(tool, conditions, reps, data_folder) {
+et_readFiles <- function(tool, conditions, num_reps, data_folder) {
 
 
   # Make tool name lower case so we know what to expect.
@@ -77,7 +77,7 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
   # Check for each condition that we have grabbed the right number of files. If
   # we don't, stop and provide an error message to the user.
   for (i in 1:length(conditions)) {
-    if (length(my_files[[i]]) != length(reps)) {
+    if (length(my_files[[i]]) != num_reps) {
       stop(paste0("The condition '", conditions[i], "' matches the wrong ",
                   "number of files (not the same as number of replicates ",
                   "specified). Please ensure condition names are specific and ",
@@ -85,15 +85,19 @@ et_readFiles <- function(tool, conditions, reps, data_folder) {
     }
   }
 
+  rep_names <- seq(num_reps) %>%
+    as.character() %>%
+    paste0("r", .)
+
   # Now set the names based on conditions and replicates, after we've checked we
   # have the right number of files.
   my_files <- my_files %>%
-    map(~set_names(., reps)) %>%  # Set replicate names within each condition
+    map(~set_names(., rep_names)) %>%  # Set replicate names within each condition
     set_names(., conditions)      # Set condition names for the overall list
 
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {
-    message(paste0(tool, " files for condition ", conditions[i], ":"))
+    message(paste0(str_to_title(tool), " files for condition ", conditions[i], ":"))
     message(paste0("\t", as.character(my_files[[unlist(conditions[i])]]), "\n"))
   }
 

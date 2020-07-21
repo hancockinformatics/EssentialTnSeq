@@ -4,7 +4,7 @@
 \alias{et_essential}
 \title{et_essential}
 \usage{
-et_essential(tool, input_df, cutoff)
+et_essential(tool, input_df, cutoff, filter = TRUE)
 }
 \arguments{
 \item{tool}{String; one of "Gumbel" or "Tradis".}
@@ -14,6 +14,10 @@ for a given condition.}
 
 \item{cutoff}{Threshold for determining essentiality based on the number of
 replicates. Recommend setting to one less than the number of replicates.}
+
+\item{filter}{If \code{TRUE} (default), the result returned to the user is
+filtered to only contains the genes determined essential. If \code{FALSE},
+the unfiltered data frame is returned instead.}
 }
 \value{
 Filtered data frame of essential genes for the condition.
@@ -27,7 +31,7 @@ Determines essentiality for a set of genes from Gumbel or
 }
 \examples{
 \dontrun{
-  et_essential("Gumbel", treatment1_df, cutoff = 2)
+  et_essential("Gumbel", treatment1_df, cutoff = 2, filter = TRUE)
 }
 
 }
