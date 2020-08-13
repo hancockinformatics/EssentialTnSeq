@@ -5,9 +5,9 @@
 The goal of EssentialTnSeq is to provide a series of functions to assist in
 essentiality analysis from TnSeq data, performed with either Gumbel or Tradis.
 
-***
+<br>
 
-### **Installation**
+## Installation
 
 You can install the stable version of EssentialTnSeq from the 
 [Github](https://github.com/hancockinformatics/EssentialTnSeq) with:
@@ -18,25 +18,19 @@ install.packages(c("devtools", "tidyverse"))
 # Then install EssentialTnSeq
 devtools::install_github("hancockinformatics/EssentialTnSeq")
 ```
-
-### **Versioning**
+## Versioning
 This package makes use of [SemVer](https://semver.org/) for versioning.
 
+## Authors
+Travis Blimkie is the originator and principal contributor. You can also click
+[here](https://github.com/hancockinformatics/EssentialTnSeq/graphs/contributors) 
+to see the full list of all contributors.
 
-### **Authors**
-
-* Travis Blimkie - Originator and principal contributor
-
-See also the [list of all
-contributors](https://github.com/hancockinformatics/EssentialTnSeq/graphs/contributors).
-
-
-### **License**
+## License
 This project is written under the MIT license, available
-[here.](https://github.com/hancockinformatics/EssentialTnSeq/blob/master/LICENSE.md)
+[here.](https://github.com/hancockinformatics/EssentialTnSeq/blob/master/LICENSE)
 
-
-### **Acknowledgements**
+## Acknowledgements
 Thanks to everyone in the lab who has used these functions and provided
 ideas/feedback!
 
