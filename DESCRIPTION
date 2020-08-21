@@ -1,6 +1,6 @@
 Package: EssentialTnSeq
 Title: TnSeq Essentiality Analysis
-Version: 0.20.11
+Version: 0.20.12
 Authors@R: 
     person(given = "Travis",
            family = "Blimkie",
@@ -9,6 +9,7 @@ Authors@R:
 Description: Performs essentiality analysis on TnSeq data.
 License: MIT + file LICENSE
 Imports:
+    crayon,
     plyr,
     dplyr,
     purrr,
