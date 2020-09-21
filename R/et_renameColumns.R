@@ -11,7 +11,9 @@
 #'
 #' @description Renames columns of all data frames in a list based on the name
 #'   of the list element containing those data frames. Designed to use the
-#'   output from \code{EssentialTnSeq::et_readFiles()}.
+#'   output from \code{EssentialTnSeq::et_readFiles()}. Joins the tables for a
+#'   given condition into one data frame containing information from all
+#'   replicates for that condition.
 #'
 #' @references None.
 #'
@@ -30,12 +32,11 @@ et_renameColumns <- function(input_list, condition) {
   step1 <- input_list
 
   for (i in 1:length(step1)) {
-    colnames(step1[[i]])[2] <- paste0(
+    colnames(step1[[i]])[2] <- paste(
       condition,
-      "_",
       names(step1)[i],
-      "_",
-      colnames(step1[[i]])[2]
+      colnames(step1[[i]])[2],
+      sep = "_"
     )
   }
 

@@ -19,7 +19,9 @@ The same list of data frames, but with columns renamed to be specific
 \description{
 Renames columns of all data frames in a list based on the name
   of the list element containing those data frames. Designed to use the
-  output from \code{EssentialTnSeq::et_readFiles()}.
+  output from \code{EssentialTnSeq::et_readFiles()}. Joins the tables for a
+  given condition into one data frame containing information from all
+  replicates for that condition.
 }
 \examples{
 \dontrun{

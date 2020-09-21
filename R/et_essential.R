@@ -32,36 +32,29 @@
 #'
 et_essential <- function(tool, input_df, cutoff, filter = TRUE) {
 
-
-  # Make tool name lower case so we know what to expect.
+  # Stop and print error if tool specified incorrectly
   tool <- tolower(tool)
 
-
-  # Stop and print error if tool specified incorrectly
   if (tool %in% c("gumbel", "tradis") == FALSE) {
     stop('Please enter either "Gumbel" or "Tradis" for tool.')
   }
 
 
   if (tool == "gumbel") {
-    ess_df <- input_df %>%
-      mutate(
-        sum_counts_E = rowSums(. == "E"),
-        ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non")
-      ) %>%
-      as_tibble()
+    ess_df <- input_df %>% mutate(
+      sum_counts_E = rowSums(. == "E"),
+      ess_stat = case_when(sum_counts_E >= cutoff ~ "ess", TRUE ~ "non")
+    )
 
   } else if (tool == "tradis") {
-    ess_df <- input_df %>%
-      mutate(
-        sum_counts_0 = rowSums(. == 0),
-        ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non")
-      ) %>%
-      as_tibble()
+    ess_df <- input_df %>% mutate(
+      sum_counts_0 = rowSums(. == 0),
+      ess_stat = case_when(sum_counts_0 >= cutoff ~ "ess", TRUE ~ "non")
+    )
   }
 
   # Filter out non-essential genes
-  df_filtered <- filter(ess_df, ess_stat == "ess")
+  df_filtered <- as_tibble(ess_df) %>% filter(ess_stat == "ess")
 
   # Return filtered or unfiltered data frame based on user argument
   if (filter) {

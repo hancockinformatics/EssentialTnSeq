@@ -54,22 +54,22 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
   if (tool == "tradis") {
     my_files <- conditions %>% map(
       ~list.files(
-        data_folder,
-        pattern = paste0(., ".*csv.all.csv"),
-        full.names = TRUE,
+        path        = data_folder,
+        pattern     = paste0(., ".*csv.all.csv"),
+        full.names  = TRUE,
         ignore.case = TRUE,
-        recursive = TRUE
+        recursive   = TRUE
       )
     )
 
   } else if (tool == "gumbel") {
     my_files <- conditions %>% map(
       ~list.files(
-        data_folder,
-        pattern = paste0(., ".*locus_tags.tsv"),
-        full.names = TRUE,
+        path        = data_folder,
+        pattern     = paste0(., ".*locus_tags.tsv"),
+        full.names  = TRUE,
         ignore.case = TRUE,
-        recursive = TRUE
+        recursive   = TRUE
       )
     )
   }
@@ -78,10 +78,11 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
   # we don't, stop and provide an error message to the user.
   for (i in 1:length(conditions)) {
     if (length(my_files[[i]]) != num_reps) {
-      stop(paste0("The condition '", conditions[i], "' matches the wrong ",
-                  "number of files (not the same as number of replicates ",
-                  "specified). Please ensure condition names are specific and ",
-                  "non-overlapping."))
+      stop(paste0(
+        "The condition '", conditions[i], "' matches the wrong number of ",
+        "files (not the same as number of replicates specified). Please ",
+        "ensure condition names are specific and non-overlapping."
+      ))
     }
   }
 
@@ -92,13 +93,18 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
   # Now set the names based on conditions and replicates, after we've checked we
   # have the right number of files.
   my_files <- my_files %>%
-    map(~set_names(., rep_names)) %>%  # Set replicate names within each condition
-    set_names(., conditions)      # Set condition names for the overall list
+    map(~set_names(., rep_names)) %>% # Set replicate names within each condition
+    set_names(., conditions)  # Set condition names for the overall list
 
   # Print info for conditions and files for the user
   for (i in 1:length(conditions)) {
-    message(paste0(str_to_title(tool), " files for condition ", conditions[i], ":"))
-    message(paste0("\t", as.character(my_files[[unlist(conditions[i])]]), "\n"))
+    message(paste0(
+      str_to_title(tool), " files for condition ", conditions[i], ":"
+    ))
+
+    message(paste0(
+      "\t", as.character(my_files[[unlist(conditions[i])]]), "\n"
+    ))
   }
 
 
