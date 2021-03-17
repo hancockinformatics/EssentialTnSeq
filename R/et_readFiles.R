@@ -57,7 +57,6 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
         path        = data_folder,
         pattern     = paste0(., ".*csv.all.csv"),
         full.names  = TRUE,
-        ignore.case = TRUE,
         recursive   = TRUE
       )
     )
@@ -68,7 +67,6 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
         path        = data_folder,
         pattern     = paste0(., ".*locus_tags.tsv"),
         full.names  = TRUE,
-        ignore.case = TRUE,
         recursive   = TRUE
       )
     )
