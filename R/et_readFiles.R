@@ -54,20 +54,20 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
   if (tool == "tradis") {
     my_files <- conditions %>% map(
       ~list.files(
-        path        = data_folder,
-        pattern     = paste0(., ".*csv.all.csv"),
-        full.names  = TRUE,
-        recursive   = TRUE
+        path       = data_folder,
+        pattern    = paste0(., ".*csv.all.csv"),
+        full.names = TRUE,
+        recursive  = TRUE
       )
     )
 
   } else if (tool == "gumbel") {
     my_files <- conditions %>% map(
       ~list.files(
-        path        = data_folder,
-        pattern     = paste0(., ".*locus_tags.tsv"),
-        full.names  = TRUE,
-        recursive   = TRUE
+        path       = data_folder,
+        pattern    = paste0(., ".*locus_tags.tsv"),
+        full.names = TRUE,
+        recursive  = TRUE
       )
     )
   }
