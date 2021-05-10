@@ -34,7 +34,6 @@ et_essential <- function(tool, input_df, cutoff, filter = TRUE) {
 
   # Stop and print error if tool specified incorrectly
   tool <- tolower(tool)
-
   if (tool %in% c("gumbel", "tradis") == FALSE) {
     stop('Please enter either "Gumbel" or "Tradis" for tool.')
   }
@@ -56,7 +55,7 @@ et_essential <- function(tool, input_df, cutoff, filter = TRUE) {
   # Filter out non-essential genes
   df_filtered <- as_tibble(ess_df) %>% filter(ess_stat == "ess")
 
-  # Return filtered or unfiltered data frame based on user argument
+  # Return filtered or unfiltered results based on input argument
   if (filter) {
     return(df_filtered)
   } else{
