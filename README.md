@@ -12,11 +12,13 @@ essentiality analysis from TnSeq data, performed with either Gumbel or Tradis.
 You can install the stable version of EssentialTnSeq from the 
 [Github](https://github.com/hancockinformatics/EssentialTnSeq) with:
 ``` r
-# Install dependencies the EssentialTnSeq
+# Install the two dependencies for EssentialTnSeq
 install.packages(c("devtools", "tidyverse"))
 devtools::install_github("hancockinformatics/EssentialTnSeq")
+```
 
-# Install the development version
+Or you can install the development version:
+```r
 devtools::install_github("hancockinformatics/EssentialTnSeq", ref = "dvl_03")
 ```
 
