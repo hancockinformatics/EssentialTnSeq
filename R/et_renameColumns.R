@@ -29,19 +29,18 @@
 #'
 et_renameColumns <- function(input_list, condition) {
 
-  step1 <- input_list
-
-  for (i in 1:length(step1)) {
-    colnames(step1[[i]])[2] <- paste(
+  for (i in 1:length(input_list)) {
+    colnames(input_list[[i]])[2] <- paste(
       condition,
-      names(step1)[i],
-      colnames(step1[[i]])[2],
+      names(input_list)[i],
+      colnames(input_list[[i]])[2],
       sep = "_"
     )
   }
 
-  step2 <- plyr::join_all(step1, by = "locus_tag", type = "full") %>%
+  joined_data <-
+    plyr::join_all(input_list, by = "locus_tag", type = "full") %>%
     as_tibble()
 
-  return(step2)
+  return(joined_data)
 }
