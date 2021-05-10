@@ -41,39 +41,29 @@
 et_readFiles <- function(tool, conditions, num_reps, data_folder) {
 
 
-  # Make tool name lower case so we know what to expect.
-  tool <- tolower(tool)
-
   # Stop and print error if tool specified incorrectly
+  tool <- tolower(tool)
   if (tool %in% c("gumbel", "tradis") == FALSE) {
     stop('Please enter either "Gumbel" or "Tradis" for tool.')
   }
 
-
   # Generate list of files to be used
-  if (tool == "tradis") {
-    my_files <- conditions %>% map(
-      ~list.files(
-        path       = data_folder,
-        pattern    = paste0(., ".*csv.all.csv"),
-        full.names = TRUE,
-        recursive  = TRUE
+  my_files <- conditions %>% map(
+    ~list.files(
+      path       = data_folder,
+      full.names = TRUE,
+      recursive  = TRUE,
+      pattern    = ifelse(
+        tool == "tradis",
+        yes = paste0(., ".*csv.all.csv"),
+        no  = paste0(., ".*locus_tags.tsv")
       )
     )
-
-  } else if (tool == "gumbel") {
-    my_files <- conditions %>% map(
-      ~list.files(
-        path       = data_folder,
-        pattern    = paste0(., ".*locus_tags.tsv"),
-        full.names = TRUE,
-        recursive  = TRUE
-      )
-    )
-  }
+  )
 
   # Check for each condition that we have grabbed the right number of files. If
-  # we don't, stop and provide an error message to the user.
+  # we don't, stop and provide an error message to the user, specifying which
+  # condition is the culprit.
   for (i in 1:length(conditions)) {
     if (length(my_files[[i]]) != num_reps) {
       stop(paste0(
@@ -84,9 +74,7 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
     }
   }
 
-  rep_names <- seq(num_reps) %>%
-    as.character() %>%
-    paste0("r", .)
+  rep_names <- paste0("r", seq(num_reps))
 
   # Now set the names based on conditions and replicates, after we've checked we
   # have the right number of files.
@@ -105,10 +93,8 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
     ))
   }
 
-
   # Read files and select columns based on specified tool
   if (tool == "gumbel") {
-
     raw_dfs <- map(my_files, function(x)
       map(x, function(y)
         read_tsv(y, progress = FALSE, col_types = cols())
@@ -131,7 +117,6 @@ et_readFiles <- function(tool, conditions, num_reps, data_folder) {
         select(y, locus_tag, read_count)
       )
     )
-
   }
 
   return(select_dfs)

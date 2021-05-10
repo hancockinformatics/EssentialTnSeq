@@ -1,6 +1,6 @@
 Package: EssentialTnSeq
 Title: TnSeq Essentiality Analysis
-Version: 0.20.21
+Version: 0.20.22
 Authors@R: 
     person(given = "Travis",
            family = "Blimkie",
